@@ -6,7 +6,7 @@
 ## 1. Giới Thiệu Nhanh
 
 
-Em viết báo cáo này để trình bày kế hoạch áp dụng Trí tuệ Nhân tạo (AI) vào công việc quản trị cơ sở dữ liệu của mình. Mục tiêu là để công việc hiệu quả hơn, nhanh hơn và chất lượng hơn, bắt kịp xu hướng chung của công ty.
+Em viết báo cáo này để trình bày kế hoạch áp dụng Trí tuệ Nhân tạo (AI) vào công việc quản trị cơ sở dữ liệu của mình. Mục tiêu là để công việc hiệu quả hơn, nhanh hơn và chất lượng hơn, bắt kịp xu hướng chung của ngành IT.
 
 Hiện tại, em tập trung vào việc xây dựng và duy trì nền tảng dữ liệu cho hệ thống Backend, bao gồm việc thiết kế bảng, luồng dữ liệu, và viết các hàm, stored procedure.
 
@@ -24,26 +24,26 @@ Khi có yêu cầu nghiệp vụ, thay vì viết tay toàn bộ, em sẽ dùng 
 
 ```mermaid
 graph TD
-    A[Yêu cầu Nghiệp vụ/Kỹ thuật] --> B{Đầu vào cho Công cụ AI (Claude Sonnet, ...)} ;
-    B -- Mô tả bằng Ngôn ngữ Tự nhiên / Code gợi ý --> C[AI Tool (Claude Sonnet, Copilot, AI2SQL)];
-    C --> D{Mã SQL / Unit Test được Sinh ra};
-    D --> E[Em (Sơn) Đánh giá & Tinh chỉnh];
-    E -- Tinh chỉnh Lặp lại (nếu cần) --> C;
-    E --> F[Mã SQL Hoàn thiện & Tối ưu];
-    F --> G[Triển khai vào Cơ sở dữ liệu];
+    A[Yêu cầu] --> B[Đầu vào AI]
+    B --> C[AI Tool]
+    C --> D[Mã SQL/Test]
+    D --> E[Đánh giá & Tinh chỉnh]
+    E --> C
+    E --> F[Mã SQL Hoàn thiện]
+    F --> G[Triển khai]
 
     subgraph Hỗ trợ từ AI
         C
         D
     end
 
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#ccf,stroke:#333,stroke-width:2px
-    style C fill:#lightgrey,stroke:#333,stroke-width:2px
-    style D fill:#lightgrey,stroke:#333,stroke-width:2px
-    style E fill:#ccf,stroke:#333,stroke-width:2px
-    style F fill:#cfc,stroke:#333,stroke-width:2px
-    style G fill:#cfc,stroke:#333,stroke-width:2px
+    style A fill:#FFB6C1,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#87CEEB,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#98FB98,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#98FB98,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#87CEEB,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ### 3.2. Kiểm Tra Tính Toàn Vẹn Dữ Liệu bằng AI
@@ -52,27 +52,27 @@ AI có thể giúp quét và phát hiện các vấn đề về dữ liệu mà 
 
 ```mermaid
 graph TD
-    A[Cơ sở dữ liệu / Nguồn dữ liệu] --> B{Dữ liệu Đầu vào cho Công cụ AI};
-    B --> C[Công cụ AI Kiểm tra Tính Toàn vẹn (ví dụ: SQLAI.ai, Kịch bản AI tùy chỉnh)];
-    C -- Quét tìm Bất thường, Thiếu nhất quán, Vi phạm Quy tắc --> D{Báo cáo Tính Toàn vẹn Dữ liệu & Gợi ý Khắc phục};
-    D --> E[Em (Sơn) Đánh giá & Xác thực];
-    E -- Vấn đề được Xác nhận --> F{Quy trình Sửa lỗi/Làm sạch Dữ liệu};
-    F --> G[Dữ liệu đã Cập nhật & Xác minh trong CSDL];
-    E -- Dương tính Giả/Không cần Hành động --> H[Giám sát & Ghi nhận Log];
+    A[CSDL] --> B[Đầu vào AI]
+    B --> C[AI Kiểm tra]
+    C --> D[Báo cáo & Gợi ý]
+    D --> E[Đánh giá & Xác thực]
+    E --> F[Sửa lỗi]
+    F --> G[Cập nhật CSDL]
+    E --> H[Giám sát]
 
     subgraph Hỗ trợ từ AI
         C
         D
     end
 
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#ccf,stroke:#333,stroke-width:2px
-    style C fill:#lightgrey,stroke:#333,stroke-width:2px
-    style D fill:#lightgrey,stroke:#333,stroke-width:2px
-    style E fill:#ccf,stroke:#333,stroke-width:2px
-    style F fill:#cfc,stroke:#333,stroke-width:2px
-    style G fill:#cfc,stroke:#333,stroke-width:2px
-    style H fill:#eee,stroke:#333,stroke-width:2px
+    style A fill:#FFB6C1,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#87CEEB,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#98FB98,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#98FB98,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#87CEEB,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#E6E6FA,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ### 3.3. Phân Tích Log và Tối Ưu Hóa Cơ Sở Dữ Liệu
@@ -81,26 +81,26 @@ AI cũng có thể hỗ trợ phân tích log hệ thống để tìm ra các đ
 
 ```mermaid
 graph TD
-    A[Log Hệ thống CSDL (Query Logs, Error Logs, Performance Metrics)] --> B{Thu thập & Tiền xử lý Dữ liệu Log};
-    B --> C[Công cụ Phân tích Log bằng AI / AI Agent];
-    C -- Nhận dạng Mẫu, Phát hiện Bất thường, Phân tích Dự đoán --> D{Thông tin Chi tiết, Khuyến nghị Tối ưu hóa, Thông báo Cảnh báo};
-    D --> E[Em (Sơn)/Nhóm Phát triển Đánh giá & Phân tích];
-    E -- Thông tin có thể Hành động --> F{Triển khai Tối ưu hóa / Giải quyết Sự cố};
-    F --> G[Giám sát & Xác minh Hiệu năng];
-    E -- Cần Điều tra Thêm --> A; 
+    A[Log Hệ thống] --> B[Thu thập Log]
+    B --> C[AI Phân tích]
+    C --> D[Báo cáo & Khuyến nghị]
+    D --> E[Đánh giá]
+    E --> F[Tối ưu hóa]
+    F --> G[Giám sát]
+    E --> A
 
     subgraph Hỗ trợ từ AI
         C
         D
     end
 
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#ccf,stroke:#333,stroke-width:2px
-    style C fill:#lightgrey,stroke:#333,stroke-width:2px
-    style D fill:#lightgrey,stroke:#333,stroke-width:2px
-    style E fill:#ccf,stroke:#333,stroke-width:2px
-    style F fill:#cfc,stroke:#333,stroke-width:2px
-    style G fill:#cfc,stroke:#333,stroke-width:2px
+    style A fill:#FFB6C1,stroke:#333,stroke-width:2px,color:#000
+    style B fill:#87CEEB,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#98FB98,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#98FB98,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#87CEEB,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ## 4. Công Cụ AI Chính và Cách Dùng
