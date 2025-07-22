@@ -161,10 +161,10 @@ graph TB
     C -.-> G
     D -.-> H
     
-    style E fill:#ffcccc
-    style F fill:#ffcccc
-    style G fill:#ffcccc
-    style H fill:#ffcccc
+    style E fill:#ffcccc,color:#000000
+    style F fill:#ffcccc,color:#000000
+    style G fill:#ffcccc,color:#000000
+    style H fill:#ffcccc,color:#000000
 ```
 
 #### 2. **⚠️ Thách thức cụ thể và tác động**
@@ -260,90 +260,67 @@ graph TB
 
 </div>
 
-```mermaid
-graph TB
-    subgraph "DATA SOURCES"
-        S1["📊 PHIS Database<br/>VTD Customers<br/>500K+ Records"]
-        S2["🌐 Ebaohiem Database<br/>Online Customers<br/>183K+ Records"]
-        S3["📋 Policy Database<br/>Insurance Data"]
-    end
-    
-    subgraph "ETL PROCESSING"
-        E1["🔄 Batch ETL<br/>Full Load<br/>60 Minutes"]
-        E2["⚡ Incremental ETL<br/>Daily Delta<br/>5 Minutes"]  
-        E3["🏢 Ebaohiem ETL<br/>Segmentation<br/>10 Minutes"]
-    end
-    
-    subgraph "DATA QUALITY"
-        T1["📞 Phone Cleaning<br/>87% Coverage"]
-        T2["📧 Email Validation<br/>75% Coverage"]
-        T3["🏷️ Tax Processing<br/>Business Rules"]
-        T4["🌍 Address Standard<br/>90% Quality"]
-    end
-    
-    subgraph "DATA WAREHOUSE"
-        DW1["👤 Customer Profile<br/>523K+ Records"]
-        DW2["🏠 Customer Address<br/>Contact Details"]
-        DW3["📋 Customer Policy<br/>Premium Data"]
-    end
-    
-    subgraph "PRESENTATION"
-        P1["📊 Dashboard<br/>25 Users"]
-        P2["🔍 Search<br/>3 Seconds"]
-        P3["📈 Analytics<br/>Reports"]
-    end
-    
-    S1 --> E1
-    S1 --> E2
-    S2 --> E3
-    S3 --> E1
-    
-    E1 --> T1
-    E2 --> T2
-    E3 --> T3
-    
-    T1 --> DW1
-    T2 --> DW2
-    T3 --> DW3
-    T4 --> DW1
-    
-    DW1 --> P1
-    DW2 --> P2
-    DW3 --> P3
-    
-    style DW1 fill:#e1f5fe
-    style DW2 fill:#e1f5fe
-    style DW3 fill:#e1f5fe
-    style P1 fill:#f3e5f5
-    style P2 fill:#f3e5f5
-    style P3 fill:#f3e5f5
-```
+#### **Kiến trúc 5 tầng chính:**
+
+<table>
+<tr>
+<td width="20%"><strong>📊 DATA SOURCES</strong></td>
+<td>
+• PHIS Database (VTD Customers - 500K+ Records)<br/>
+• Ebaohiem Database (Online Customers - 183K+ Records)<br/>
+• Policy Database (Insurance Data)
+</td>
+</tr>
+<tr>
+<td><strong>🔄 ETL PROCESSING</strong></td>
+<td>
+• Batch ETL (Full Load - 60 Minutes)<br/>
+• Incremental ETL (Daily Delta - 5 Minutes)<br/>
+• Ebaohiem ETL (Segmentation - 10 Minutes)
+</td>
+</tr>
+<tr>
+<td><strong>✅ DATA QUALITY</strong></td>
+<td>
+• Phone Cleaning (87% Coverage)<br/>
+• Email Validation (75% Coverage)<br/>
+• Tax Processing (Business Rules)<br/>
+• Address Standardization (90% Quality)
+</td>
+</tr>
+<tr>
+<td><strong>🏪 DATA WAREHOUSE</strong></td>
+<td>
+• Customer Profile (523K+ Records)<br/>
+• Customer Address (Contact Details)<br/>
+• Customer Policy (Premium Data)
+</td>
+</tr>
+<tr>
+<td><strong>📱 PRESENTATION</strong></td>
+<td>
+• Dashboard (25 Users)<br/>
+• Search Function (3 Seconds)<br/>
+• Analytics & Reports
+</td>
+</tr>
+</table>
 
 ### 🔄 **Data Flow Architecture**
 
-```mermaid
-sequenceDiagram
-    participant Source as 📊 Source Systems
-    participant Extract as 🔄 ETL Processing
-    participant Quality as ✅ Data Quality
-    participant DW as 🏪 Data Warehouse
-    participant API as 🔌 Customer API
-    participant UI as 📱 Dashboard UI
-    
-    Note over Source,UI: Daily ETL Processing Flow
-    
-    Source->>Extract: 1. Extract raw data
-    Extract->>Quality: 2. Apply transformations
-    Quality->>Quality: 3. Phone cleaning<br/>Email validation<br/>Deduplication
-    Quality->>DW: 4. Load clean data
-    
-    Note over Source,UI: Customer Lookup Flow
-    
-    UI->>API: 5. Search by phone
-    API->>DW: 6. Query customer data
-    DW->>API: 7. Return customer 360°
-    API->>UI: 8. Display results
-```
+#### **Quy trình xử lý dữ liệu chính:**
+
+**🔄 Daily ETL Processing Flow:**
+1. **Extract raw data** từ Source Systems
+2. **Apply transformations** qua ETL Processing
+3. **Data cleaning** (Phone cleaning, Email validation, Deduplication)
+4. **Load clean data** vào Data Warehouse
+
+**🔍 Customer Lookup Flow:**
+1. User **Search by phone** trên Dashboard UI
+2. **Query customer data** từ Data Warehouse
+3. **Return customer 360°** view
+4. **Display results** cho user
 
 <details>
 <summary><b>📋 Data Flow Details</b></summary>
@@ -420,11 +397,11 @@ graph LR
     C2 --> D1
     D1 --> D2
     
-    style A1 fill:#ffebee
-    style B1 fill:#e8f5e8
-    style C1 fill:#e3f2fd
-    style D1 fill:#fff3e0
-    style E1 fill:#f3e5f5
+    style A1 fill:#ffebee,color:#000000
+    style B1 fill:#e8f5e8,color:#000000
+    style C1 fill:#e3f2fd,color:#000000
+    style D1 fill:#fff3e0,color:#000000
+    style E1 fill:#f3e5f5,color:#000000
 ```
 
 ### 🧩 **Core Components Stack**
@@ -562,12 +539,12 @@ graph TD
     L3 --> L4
     L4 --> N1
     
-    style Start fill:#e8f5e8
-    style E1 fill:#fff3e0
-    style E2 fill:#fff3e0
-    style L2 fill:#e3f2fd
-    style L4 fill:#e3f2fd
-    style N1 fill:#f3e5f5
+    style Start fill:#e8f5e8,color:#000000
+    style E1 fill:#fff3e0,color:#000000
+    style E2 fill:#fff3e0,color:#000000
+    style L2 fill:#e3f2fd,color:#000000
+    style L4 fill:#e3f2fd,color:#000000
+    style N1 fill:#f3e5f5,color:#000000
 ```
 
 #### Data Processing Details
@@ -652,12 +629,12 @@ graph TD
     U2 --> TS2
     TS2 --> M1
     
-    style Start fill:#e1f5fe
-    style TS1 fill:#fff8e1
-    style TS2 fill:#fff8e1
-    style U1 fill:#e8f5e8
-    style U2 fill:#e8f5e8
-    style M1 fill:#f3e5f5
+    style Start fill:#e1f5fe,color:#000000
+    style TS1 fill:#fff8e1,color:#000000
+    style TS2 fill:#fff8e1,color:#000000
+    style U1 fill:#e8f5e8,color:#000000
+    style U2 fill:#e8f5e8,color:#000000
+    style M1 fill:#f3e5f5,color:#000000
 ```
 
 #### Incremental Query Strategy
@@ -771,13 +748,13 @@ graph TD
     SYNC --> A4
     A4 --> N1
     
-    style Start fill:#e8f5e8
-    style E1 fill:#fff3e0
-    style E2 fill:#fff3e0
-    style P4 fill:#e3f2fd
-    style A4 fill:#e3f2fd
-    style SYNC fill:#ffebee
-    style N1 fill:#f3e5f5
+    style Start fill:#e8f5e8,color:#000000
+    style E1 fill:#fff3e0,color:#000000
+    style E2 fill:#fff3e0,color:#000000
+    style P4 fill:#e3f2fd,color:#000000
+    style A4 fill:#e3f2fd,color:#000000
+    style SYNC fill:#ffebee,color:#000000
+    style N1 fill:#f3e5f5,color:#000000
 ```
 
 #### Complex Source Query
@@ -892,10 +869,10 @@ graph TB
     D2 --> DW2
     D3 --> DW3
     
-    style UI1 fill:#e8f5e8
-    style UI2 fill:#fff3e0
-    style UI3 fill:#e3f2fd
-    style S1 fill:#f3e5f5
+    style UI1 fill:#e8f5e8,color:#000000
+    style UI2 fill:#fff3e0,color:#000000
+    style UI3 fill:#e3f2fd,color:#000000
+    style S1 fill:#f3e5f5,color:#000000
 ```
 
 ### Key Features Implemented
@@ -1222,14 +1199,14 @@ graph LR
     B3 --> A3
     B4 --> A4
     
-    style B1 fill:#ffebee
-    style B2 fill:#ffebee
-    style B3 fill:#ffebee
-    style B4 fill:#ffebee
-    style A1 fill:#e8f5e8
-    style A2 fill:#e8f5e8
-    style A3 fill:#e8f5e8
-    style A4 fill:#e8f5e8
+    style B1 fill:#ffebee,color:#000000
+    style B2 fill:#ffebee,color:#000000
+    style B3 fill:#ffebee,color:#000000
+    style B4 fill:#ffebee,color:#000000
+    style A1 fill:#e8f5e8,color:#000000
+    style A2 fill:#e8f5e8,color:#000000
+    style A3 fill:#e8f5e8,color:#000000
+    style A4 fill:#e8f5e8,color:#000000
 ```
 
 #### C. **Customer Segmentation Results**
@@ -1400,11 +1377,11 @@ graph TD
     P --> R
     R --> D
     
-    style S fill:#fff3e0
-    style K fill:#e3f2fd
-    style P fill:#e8f5e8
-    style R fill:#f3e5f5
-    style D fill:#ffebee
+    style S fill:#fff3e0,color:#000000
+    style K fill:#e3f2fd,color:#000000
+    style P fill:#e8f5e8,color:#000000
+    style R fill:#f3e5f5,color:#000000
+    style D fill:#ffebee,color:#000000
 ```
 
 **Technology Stack**:
