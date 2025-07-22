@@ -8,7 +8,7 @@
 ---
 
 ![CDP Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
-![ROI](https://img.shields.io/badge/ROI-659%25-blue)
+![ROI](https://img.shields.io/badge/ROI-%25-blue)
 ![Data Quality](https://img.shields.io/badge/Data%20Quality-87%25-orange)
 ![Customers](https://img.shields.io/badge/Customers-+86K%2B-purple)
 
