@@ -10,7 +10,7 @@
 ![CDP Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![ROI](https://img.shields.io/badge/ROI-659%25-blue)
 ![Data Quality](https://img.shields.io/badge/Data%20Quality-87%25-orange)
-![Customers](https://img.shields.io/badge/Customers-523K%2B-purple)
+![Customers](https://img.shields.io/badge/Customers-53K%2B-purple)
 
 *Version 1.0 | January 2025 | Prepared by Son Pham*
 
@@ -106,7 +106,7 @@ Hệ thống **Customer Data Platform (CDP)** được triển khai tại Phú H
 
 ```
 📊 DATA INTEGRATION SUCCESS
-├── 🔗 523,847 customers unified
+├── 🔗 53,847 customers unified
 ├── 📞 87% phone coverage achieved  
 ├── 📧 75% email coverage achieved
 └── 🎯 <2% duplicate rate
