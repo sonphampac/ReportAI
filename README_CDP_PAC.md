@@ -50,9 +50,8 @@
 
 | **Metric** | **Before** | **After** | **Improvement** |
 |------------|------------|-----------|-----------------|
-| **Search Time** | 15 minutes | < 3 seconds | **99.7% faster** |
+| **Search Time** | 2-3 minutes | < 3 seconds | **99.7% faster** |
 | **Data Quality** | 65% | 92% | **+27 points** |
-| **ROI** | - | 659% | **$395K savings** |
 | **Automation** | 0% | 100% | **Complete ETL** |
 
 </div>
@@ -112,7 +111,6 @@ Hệ thống **Customer Data Platform (CDP)** được triển khai tại Phú H
 └── 🎯 <2% duplicate rate
 
 💰 BUSINESS IMPACT
-├── 💵 ROI: 659% ($395K annual savings)
 ├── ⚡ 99.7% faster customer lookup
 ├── 📈 48x faster report generation
 └── 🤖 100% ETL automation
@@ -128,8 +126,8 @@ Hệ thống **Customer Data Platform (CDP)** được triển khai tại Phú H
 
 #### ✅ **Key Deliverables**
 - ✅ **Tích hợp thành công 2 nguồn dữ liệu chính**: VTD (PHIS) và Ebaohiem
-- ✅ **Xử lý 523,847 bản ghi khách hàng** với độ chính xác 92%
-- ✅ **Giảm 99.7% thời gian tra cứu** từ 15 phút xuống <3 giây
+- ✅ **Xử lý 86,847 bản ghi khách hàng** với độ chính xác 92%
+- ✅ **Giảm 99.7% thời gian tra cứu** từ 2-3 phút xuống <3 giây
 - ✅ **Tự động hóa 100% quy trình ETL** thay thế xử lý thủ công
 - ✅ **Cải thiện 42% chất lượng dữ liệu** với automated cleaning
 
@@ -176,7 +174,7 @@ graph TB
 | **🔄 Dữ liệu phân tán** | Không có customer 360° view | **40 giờ/tuần** tra cứu thủ công |
 | **🔻 Chất lượng dữ liệu kém** | 30% thông tin liên lạc không chính xác | **Mất 25%** cơ hội bán hàng |
 | **⏹️ Không có CDC** | Dữ liệu không đồng bộ real-time | **Quyết định sai** dựa trên data cũ |
-| **📝 Báo cáo thủ công** | Manager không có insights kịp thời | **2 ngày** để tạo báo cáo |
+| **📝 Báo cáo thủ công** | Không có insights kịp thời | Mất nhiều thời gian |
 
 </div>
 
@@ -197,6 +195,7 @@ graph TB
 
 </details>
 
+<details>
 #### 3. **🎯 Yêu cầu nghiệp vụ từ Management**
 
 <table>
@@ -210,6 +209,7 @@ graph TB
 
 </td>
 <td width="50%">
+<details>
 
 **🤖 AUTOMATION & CLASSIFICATION**
 - 👤 **Auto-classify** Individual vs Corporate
