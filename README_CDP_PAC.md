@@ -808,15 +808,15 @@ graph TB
 **Customer Type Distribution**:
 ```mermaid
 pie title Customer Segmentation
-    "Cá nhân (Individual)" : 75
-    "Doanh nghiệp (Corporate)" : 25
+    "Cá nhân (Individual)" : 37.6
+    "Doanh nghiệp (Corporate)" : 62.4
 ```
 
 **Data Source Analysis**:
 ```mermaid
 pie title Data Source Distribution  
-    "VTD (PHIS)" : 65
-    "Ebaohiem (Online)" : 35
+    "VTD (PHIS)" : 98
+    "Ebaohiem (Online)" : 2
 ```
 
 #### 4. **📋 Raw Data Export**
