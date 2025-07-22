@@ -10,7 +10,7 @@
 ![CDP Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![ROI](https://img.shields.io/badge/ROI-659%25-blue)
 ![Data Quality](https://img.shields.io/badge/Data%20Quality-87%25-orange)
-![Customers](https://img.shields.io/badge/Customers-53K%2B-purple)
+![Customers](https://img.shields.io/badge/Customers-+86K%2B-purple)
 
 *Version 1.0 | January 2025 | Prepared by Son Pham*
 
@@ -195,48 +195,6 @@ graph TB
 
 </details>
 
-<details>
-#### 3. **🎯 Yêu cầu nghiệp vụ từ Management**
-
-<table>
-<tr>
-<td width="50%">
-
-**🔍 SEARCH & RETRIEVAL**
-- ⚡ **<3 seconds** customer lookup by phone
-- 🎯 **360° view** complete customer profile
-- 📱 **Mobile-friendly** interface
-
-</td>
-<td width="50%">
-</details>
-
-**🤖 AUTOMATION & CLASSIFICATION**
-- 👤 **Auto-classify** Individual vs Corporate
-- 🔄 **Scheduled updates** from multiple sources
-- ✅ **>95% accuracy** data quality assurance
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-**📊 ANALYTICS & REPORTING**
-- 📈 **Real-time dashboard** for management
-- 📋 **Executive KPIs** monitoring
-- 📊 **Interactive charts** and insights
-
-</td>
-<td width="50%">
-
-**🔧 OPERATIONAL REQUIREMENTS**
-- 🏗️ **Scalable architecture** for growth
-- 🔐 **Data security** and compliance
-- 🛠️ **Easy maintenance** and monitoring
-
-</td>
-</tr>
-</table>
 
 ---
 
@@ -266,17 +224,17 @@ graph TB
 <tr>
 <td width="20%"><strong>📊 DATA SOURCES</strong></td>
 <td>
-• PHIS Database (VTD Customers - 500K+ Records)<br/>
-• Ebaohiem Database (Online Customers - 183K+ Records)<br/>
+• PHIS Database (VTD Customers - 80K+ Records)<br/>
+• Ebaohiem Database (Online Customers - 1K+ Records)<br/>
 • Policy Database (Insurance Data)
 </td>
 </tr>
 <tr>
 <td><strong>🔄 ETL PROCESSING</strong></td>
 <td>
-• Batch ETL (Full Load - 60 Minutes)<br/>
-• Incremental ETL (Daily Delta - 5 Minutes)<br/>
-• Ebaohiem ETL (Segmentation - 10 Minutes)
+• Batch ETL (Full Load - 6 Minutes)<br/>
+• Incremental ETL (Daily Delta - 1 Minutes)<br/>
+• Ebaohiem ETL (Segmentation - 5 Minutes)
 </td>
 </tr>
 <tr>
@@ -291,7 +249,7 @@ graph TB
 <tr>
 <td><strong>🏪 DATA WAREHOUSE</strong></td>
 <td>
-• Customer Profile (523K+ Records)<br/>
+• Customer Profile (86K+ Records)<br/>
 • Customer Address (Contact Details)<br/>
 • Customer Policy (Premium Data)
 </td>
@@ -461,9 +419,9 @@ graph LR
 
 | **Pipeline** | **Type** | **Volume** | **Frequency** | **Duration** | **Use Case** |
 |--------------|----------|------------|---------------|--------------|--------------|
-| **🔄 Batch ETL** | Full Load | 523K+ records | Manual | 60 minutes | Initial + Recovery |
-| **⚡ Incremental** | Delta | ~1K records | Mon-Fri 15:00 | 5 minutes | Daily Updates |
-| **🏢 Ebaohiem** | Segmentation | 183K+ records | Daily 00:00 | 10 minutes | Customer Classification |
+| **🔄 Batch ETL** | Full Load | 86K+ records | Manual | 6 minutes | Initial + Recovery |
+| **⚡ Incremental** | Delta | ~1K records | Mon-Fri 15:00 | 1 minutes | Daily Updates |
+| **🏢 Ebaohiem** | Segmentation | 183K+ records | Daily 00:00 | 5 minutes | Customer Classification |
 
 </div>
 
@@ -482,11 +440,11 @@ graph LR
 </tr>
 <tr>
 <td><b>📊 Volume</b></td>
-<td><b>523,847 records</b> (Customer + Address)</td>
+<td><b>86,668 records</b> (Customer + Address)</td>
 </tr>
 <tr>
 <td><b>⏱️ Duration</b></td>
-<td><b>60 minutes</b> average processing time</td>
+<td><b>8 minutes</b> average processing time</td>
 </tr>
 </table>
 
@@ -515,7 +473,7 @@ graph TD
     
     subgraph "LOAD"
         L1["📝 Generate IDs<br/>Auto Increment"]
-        L2["💾 Load Profile<br/>523K+ Records"]
+        L2["💾 Load Profile<br/>86K+ Records"]
         L3["🔗 Link Address<br/>Foreign Keys"]
         L4["💾 Load Address<br/>Contact Details"]
     end
@@ -548,18 +506,6 @@ graph TD
 ```
 
 #### Data Processing Details
-
-**Source Query (tblInsured)**:
-```sql
-SELECT tInsuredCode, tVietNameseInsuredName, tVietNameseInsuredAddress,
-       tNationalCode, tTaxCode, bPotentialFlag, tInsuredType,
-       BankAccountNbr, BankName, tPhone, Email, tBranchCode,
-       tSeller, tDept, tTeam, tEmployeeID, SaleChannel,
-       Crtd_DateTime, Lupd_DateTime
-FROM PHIS.dbo.tblInsured i
-LEFT JOIN PHIS.dbo.ITG_Ebaohiem_Vtd v ON i.tInsuredCode = v.InsuredCode_vtd
-WHERE v.InsuredCode_vtd IS NULL AND i.tActive='Y'
-```
 
 **Key Transformations**:
 - **Phone Processing**: Extract, validate, and standardize phone numbers
@@ -659,26 +605,12 @@ def get_incremental_query_insured():
     return query
 ```
 
-#### UPSERT Operations
-
-**Customer Profile UPSERT**:
-```sql
-MERGE CDP_CustomerProfile AS target
-USING #TempCustomer AS source ON target.InsuredCode = source.InsuredCode
-WHEN MATCHED THEN UPDATE SET
-    Name = source.Name,
-    Email = source.Email,
-    Phone = source.Phone,
-    Lupd_DateTime = GETDATE()
-WHEN NOT MATCHED THEN INSERT (InsuredCode, Name, Email, Phone, ...)
-VALUES (source.InsuredCode, source.Name, source.Email, source.Phone, ...);
-```
 
 #### Schedule & Performance
 - **Schedule**: `0 15 * * 1-5` (3PM, Monday-Friday)
 - **Start Date**: 2025-07-21
-- **Processing Time**: ~5-10 minutes vs 2+ hours full load
-- **Data Volume**: Typically 100-1000 records vs 500K+ full load
+- **Processing Time**: ~3-5 minutes
+- **Data Volume**: Typically 100-1000 records
 
 ---
 
@@ -757,24 +689,6 @@ graph TD
     style N1 fill:#f3e5f5,color:#000000
 ```
 
-#### Complex Source Query
-
-**Multi-table JOIN Strategy**:
-```sql
-SELECT a.BatNbr_vtd AS BatNbr,
-       a.tClassCode,
-       a.iPolicyId_ebaohiem AS PolicyId,
-       a.InsuredCode_vtd AS InsuredCode,
-       b.Source,
-       c.tCustomerId,
-       c.tDescriptionVN AS CustomerName, 
-       c.tAddress AS Address, 
-       c.tPhoneNumber AS Phone, 
-       c.tEmail AS Email
-FROM PHIS.dbo.ITG_Ebaohiem_Vtd a
-LEFT JOIN ES_COMM.dbo.tblPolicy b ON b.iPolicyId = a.iPolicyId_ebaohiem
-LEFT JOIN ES_COMM.dbo.tblCustomer c ON b.tCustomerId = c.tCustomerId
-```
 
 #### Customer Type Classification
 
@@ -880,42 +794,14 @@ graph TB
 #### 1. **📈 Executive KPI Dashboard**
 
 **Real-time Business Metrics**:
-- **Total Customers**: 500K+ across all channels
+- **Total Customers**: 86K+ across all channels
 - **Data Quality Score**: 87% (phone + email coverage)
 - **Source Distribution**: VTD vs Ebaohiem breakdown
 - **Recent Updates**: 7-day rolling activity
 
 #### 2. **🔍 Customer Search & 360° View**
 
-**Search by Phone Number**:
-```python
-def search_by_phone(self, phone_number: str) -> Dict[str, Any]:
-    """Tìm kiếm khách hàng qua số điện thoại với Customer 360° view"""
-    
-    # Clean phone number
-    phone_clean = phone_number.strip().replace(" ", "").replace("-", "")
-    
-    # Customer profile lookup
-    customer_query = """
-    SELECT ID, InsuredCode, Name, Email, Phone, Address, 
-           NameSource, InsuredType, National, TaxCode
-    FROM DW.dbo.CDP_CustomerProfile 
-    WHERE Phone LIKE ?
-    """
-    
-    # Policy lookup based on source
-    if customer['NameSource'] == 'Ebaohiem':
-        policy_query = "SELECT * FROM CDP_CustomerPolicy WHERE BatNbr = ?"
-    else:
-        policy_query = "SELECT * FROM CDP_CustomerPolicy WHERE InsuredCode = ?"
-    
-    return {
-        "customer_info": customer_data,
-        "customer_type": determine_customer_type(customer_data),
-        "policies": policy_data,
-        "additional_info": get_additional_info()
-    }
-```
+
 
 #### 3. **📊 Interactive Analytics**
 
@@ -1170,9 +1056,9 @@ def system_health_check():
 
 | **Metric** | **Before CDP** | **After CDP** | **Improvement** |
 |------------|----------------|---------------|-----------------|
-| **Customer Lookup Time** | 15 minutes (manual) | <3 seconds | **99.7% faster** |
+| **Customer Lookup Time** | 2-3 minutes (manual) | <3 seconds | **99.7% faster** |
 | **Data Accuracy** | 65% | 92% | **+27 percentage points** |
-| **Report Generation** | 2 days | Real-time | **48x faster** |
+| **Report Generation** |  >4 hours | Real-time | **48x faster** |
 | **Data Integration** | Manual Excel | Automated ETL | **100% automation** |
 | **Customer 360° View** | Not available | Complete view | **New capability** |
 
@@ -1211,12 +1097,6 @@ graph LR
 
 #### C. **Customer Segmentation Results**
 
-**Achieved Segmentation**:
-- **Total Customers**: 523,847 records unified
-- **Individual Customers**: 392,885 (75%)
-- **Corporate Customers**: 130,962 (25%)
-- **VTD Source**: 340,500 customers (65%)
-- **Ebaohiem Source**: 183,347 customers (35%)
 
 ### 2. **Technical Achievements**
 
@@ -1242,8 +1122,8 @@ gantt
 ```
 
 **Performance Metrics**:
-- **Full Load**: 523K records in 60 minutes
-- **Incremental Load**: ~1K records in 5 minutes  
+- **Full Load**: 86K records in 6 minutes
+- **Incremental Load**: ~1K records in 2-3 minutes  
 - **Data Processing Rate**: 8,700 records/minute
 - **System Availability**: 99.5% uptime
 
@@ -1261,50 +1141,6 @@ gantt
 - **Data Validation**: 15+ quality checks per pipeline
 - **Monitoring**: Real-time alerting on failures
 
-### 3. **User Adoption & Satisfaction**
-
-#### A. **Dashboard Usage**
-
-**Monthly Usage Statistics**:
-- **Daily Active Users**: 25 business users
-- **Customer Searches**: 1,200+ per month
-- **Dashboard Views**: 3,500+ page views/month
-- **Export Downloads**: 180+ Excel exports/month
-
-#### B. **Business User Feedback**
-
-**Satisfaction Survey Results**:
-- **Search Speed**: 95% satisfied (vs 20% before)
-- **Data Accuracy**: 90% confident in data quality
-- **Report Timeliness**: 100% prefer real-time dashboards
-- **Overall System**: 92% would recommend to other departments
-
-### 4. **Financial Impact**
-
-#### A. **Cost Savings**
-
-| **Cost Category** | **Annual Before** | **Annual After** | **Savings** |
-|-------------------|-------------------|------------------|-------------|
-| **Manual Data Processing** | 200 hours/month × $50 | Automated | **$120,000** |
-| **Report Generation** | 50 hours/month × $75 | Real-time | **$45,000** |
-| **Data Quality Issues** | Lost opportunities | 95% reduction | **$200,000** |
-| **System Integration** | Multiple tools | Single platform | **$30,000** |
-| **Total Annual Savings** | | | **$395,000** |
-
-#### B. **ROI Calculation**
-
-**Investment**:
-- Development Time: 3 months × $15,000 = $45,000
-- Infrastructure: $5,000
-- Training: $2,000
-- **Total Investment**: $52,000
-
-**Return on Investment**:
-- **Annual Savings**: $395,000
-- **ROI**: (395,000 - 52,000) / 52,000 = **659%**
-- **Payback Period**: 1.6 months
-
----
 
 ## 🚀 KHUYẾN NGHỊ VÀ HƯỚNG PHÁT TRIỂN
 
@@ -1566,14 +1402,13 @@ graph TD
 Hệ thống **Customer Data Platform (CDP)** đã được triển khai thành công tại Phú Hưng Assurance, mang lại những **thay đổi căn bản** trong cách thức quản lý và sử dụng dữ liệu khách hàng:
 
 #### 🎯 **Tác động nghiệp vụ**
-- **Thống nhất 523,847 bản ghi khách hàng** từ 2 nguồn dữ liệu chính
-- **Cải thiện 659% ROI** với chi phí đầu tư $52,000 và tiết kiệm $395,000/năm
-- **Giảm 99.7% thời gian tra cứu** từ 15 phút xuống <3 giây
+- **Thống nhất +86K bản ghi khách hàng** từ 2 nguồn dữ liệu chính
+- **Giảm 99.7% thời gian tra cứu** từ 2-5 phút xuống <3 giây
 - **Tăng 27% độ chính xác dữ liệu** từ 65% lên 92%
 
 #### 🔧 **Thành tựu kỹ thuật**
 - **3 ETL Pipeline hoàn chỉnh** với khả năng xử lý 8,700 records/phút
-- **Dashboard real-time** với 25 người dùng hàng ngày
+- **Dashboard real-time** với nhiều người dùng hàng ngày
 - **Data quality engine** với 15+ validation rules tự động
 - **Customer 360° view** hoàn toàn mới cho business users
 
@@ -1624,7 +1459,7 @@ Hệ thống CDP đã sẵn sàng để **scale và evolve** cùng với sự ph
 
 ---
 
-*Báo cáo được chuẩn bị bởi: **Son Pham** - CDP Technical Lead*  
+*Báo cáo được chuẩn bị bởi: **Son Pham** - Data Engineer*  
 *Ngày cập nhật: **January 2025***  
 *Version: **1.0***
 
