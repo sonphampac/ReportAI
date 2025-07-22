@@ -209,7 +209,7 @@ graph TB
 
 </td>
 <td width="50%">
-<details>
+</details>
 
 **🤖 AUTOMATION & CLASSIFICATION**
 - 👤 **Auto-classify** Individual vs Corporate
