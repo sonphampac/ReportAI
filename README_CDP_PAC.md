@@ -13,6 +13,15 @@
 ![Customers](https://img.shields.io/badge/Customers-+86K%2B-purple)
 
 *Version 1.0 | January 2025 | Prepared by Son Pham*
+---
+
+*Báo cáo được chuẩn bị bởi: **Son Pham** - Data Engineer*  
+*Ngày cập nhật: **January 2025***  
+*Version: **1.0***
+*Thông tin truy cập Airflow: **192.168.69.121:18080** user/pass: airflow/airflow*
+*Thông tin truy cập Dashboard: **192.168.69.121:8050***
+
+---
 
 </div>
 
@@ -1463,7 +1472,7 @@ Hệ thống CDP đã sẵn sàng để **scale và evolve** cùng với sự ph
 *Ngày cập nhật: **January 2025***  
 *Version: **1.0***
 *Thông tin truy cập Airflow: **192.168.69.121:18080** user/pass: airflow/airflow*
-*Thông tin truy cập Dashboard: **192.168.69.121:8050**
+*Thông tin truy cập Dashboard: **192.168.69.121:8050***
 
 ---
 
