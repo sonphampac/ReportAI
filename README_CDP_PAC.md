@@ -421,7 +421,7 @@ graph LR
 |--------------|----------|------------|---------------|--------------|--------------|
 | **🔄 Batch ETL** | Full Load | 86K+ records | Manual | 6 minutes | Initial + Recovery |
 | **⚡ Incremental** | Delta | ~1K records | Mon-Fri 15:00 | 1 minutes | Daily Updates |
-| **🏢 Ebaohiem** | Segmentation | 183K+ records | Daily 00:00 | 5 minutes | Customer Classification |
+| **🏢 Ebaohiem** | Segmentation | 1K+ records | Daily 00:00 | 5 minutes | Customer Classification |
 
 </div>
 
