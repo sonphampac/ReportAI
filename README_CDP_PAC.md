@@ -3,7 +3,7 @@
 # 📊 BÁO CÁO TRIỂN KHAI HỆ THỐNG
 ## CUSTOMER DATA PLATFORM (CDP)
 
-**🏢 PHU HUNG ASSURANCE VIETNAM**
+**🏢 PHU HUNG ASSURANCE**
 
 ---
 
@@ -42,7 +42,7 @@
 
 ## 🎯 TÓM TẮT EXECUTIVE SUMMARY
 
-> **🚀 EXECUTIVE OVERVIEW**: Hệ thống Customer Data Platform (CDP) đã được triển khai thành công tại Phú Hưng Assurance, mang lại ROI 659% và thống nhất 523K+ bản ghi khách hàng từ 2 nguồn dữ liệu chính.
+> **🚀 EXECUTIVE OVERVIEW**: Hệ thống Customer Data Platform (CDP) đã được triển khai thành công tại Phú Hưng Assurance, mang lại và thống nhất 86K+ bản ghi khách hàng từ 2 nguồn dữ liệu chính.
 
 <div align="center">
 
